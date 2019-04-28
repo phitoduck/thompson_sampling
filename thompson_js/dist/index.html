@@ -1,0 +1,220 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script type="text/javascript" src="thompson.bundle.js"></script></body>
+  <script src="dist/thompson.bundle.js"></script>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+
+  <style>
+    /* set up custom fonts */
+    @import url(https://fonts.googleapis.com/css?family=Glegoo|Hind+Siliguri|Varela+Round|Zilla+Slab);
+    @font-face {
+      font-family: "Game-of-Thrones";
+      src: url('./src/fonts/Game-of-Thrones.ttf');
+    }
+
+    #plot-box {
+      font-family: 'Zilla Slab', serif;
+    }
+
+    .thmpsn-nav-bar-link:hover {
+      color: gray;
+      transition: 0.1s;
+    }
+
+    #dashboard {
+      /* background-image: linear-gradient(#0375B4, #0375AF); */
+      background-image: linear-gradient(#0375B4, rgb(29, 70, 117));
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+    }
+
+    #plot-box {
+      margin-bottom: 20px;
+      margin-top: 20px;
+      background-color: white;
+      text-align: center;
+    }
+
+    #buttons {
+      align-content: center;
+      margin-bottom: 20px;
+    }
+
+    .thmpsn-btn {
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 2px;
+      font-size: 18px;
+      padding: 5px 15px;
+      margin-right: 10px;
+    }
+
+    .thmpsn-btn-secondary {
+      background: rgba(0, 0, 255, 0);
+      border: white;
+      border-style: solid;
+      border-width: 1px;
+      color: white;
+    }
+
+    .thmpsn-btn-secondary:hover {
+      color: gray;
+      border-color: gray;
+      transition: 0.1s;
+    }
+
+    .thmpsn-btn-primary {
+      background: #EA5356;
+      border: white;
+      color: white;
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    .thmpsn-btn-primary:hover {
+      background: #972539;
+      transition: 0.1s;
+    }
+
+    #thmpsn-dialog-header {
+      font-family: Game-of-Thrones;
+      /* margin-top: 20px; */
+      color: gold;
+      background-color:rgba(0, 0, 0, 0.433);
+      padding: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    #thmpsn-adopt-btn {
+      background: #A266A4;
+      border: 1px rgb(255, 255, 255) solid;
+      border-radius: 10px;
+      color: white;
+      /* font-weight: bold; */
+      font-size: 30px;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      margin-top: 15%;
+      padding: 5px 15px;
+    }
+
+    #thmpsn-adopt-btn:hover {
+      background: white;
+      color: #A266A4;
+      transition: 0.2s;
+    }
+
+    #thmpsn-leave-btn {
+      background: #A266A4;
+      border: 1px rgb(255, 255, 255) solid;
+      border-radius: 10px;
+      color: white;
+      /* font-weight: bold; */
+      font-size: 25px;
+      margin-left: 20px;
+      padding: 5px 15px;
+    }
+
+    #thmpsn-leave-btn:hover {
+      background: white;
+      color: #A266A4;
+      transition: 0.2s;
+    }
+
+    /* greys out the screen */
+    #cover {
+      display: none;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      background: gray;
+      filter: alpha(Opacity=50);
+      opacity: 0.5;
+      -moz-opacity: 0.5;
+      -khtml-opacity: 0.5
+    }
+
+    /* popup with cat website */
+    #dialog {
+      min-height: 30%;
+      background: url('./src/images/cute-cat.jpg') no-repeat center;
+      display: none;
+      top: 200px;
+      width: 60%;
+      height: 85%;
+      position: absolute;
+      z-index: 100;
+      background: white;
+      padding: 2px;
+      font: 10pt tahoma;
+      /* border: 1px solid gray */
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+
+    <!-- page content -->
+    <div class="container-fluid" id="wrapper">
+
+      <!-- used to gray out the screen -->
+      <div id="cover"></div>
+
+      <div class="container" id="dialog" style="background-size: contain; background: no-repeat; background-image: url(./src/images/cute-cat.jpg)">
+          <!-- <img src="http://your-image.jpg" style="visibility: hidden;" id="img-container"/> -->
+        <div class="row justify-content-center">
+          <!-- cat content goes here dynamically -->
+        </div>
+      </div>
+
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand thmpsn-nav-bar-link" href="#">&#8249; Back to Projects</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link thmpsn-nav-bar-link" href="#">
+                <i class="fa fa-home"></i> Home<span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <span class="navbar-text">Made with D3.js</span>
+      </nav>
+
+      <div class="row justify-content-center" id="dashboard">
+        <div class="col">
+          <div class="row justify-content-center">
+            <div id="plot-box">
+              <h2>Thompson Sampling on Background Images</h2>
+              <svg id="visualization" width="700" height="380"></svg>
+              <h4>Predicted Conversion Rate</h4>
+            </div>
+          </div>
+
+          <div class="row justify-content-center" id="buttons">
+            <button id='reset-button' class='thmpsn-btn thmpsn-btn-secondary'>Reset</button>
+            <button id='sample-button' class='thmpsn-btn thmpsn-btn-primary'>Sample</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="article">
+        <!-- <h1>Thompson Sampling over A/B Testing</h1> -->
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

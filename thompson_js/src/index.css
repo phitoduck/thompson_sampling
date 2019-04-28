@@ -1,0 +1,186 @@
+/* set up custom fonts */
+@import url(https://fonts.googleapis.com/css?family=Glegoo|Hind+Siliguri|Varela+Round|Zilla+Slab);
+
+@font-face {
+  font-family: "Game-of-Thrones";
+  src: url('./src/fonts/Game-of-Thrones.ttf');
+}
+
+#plot-box {
+  font-family: 'Zilla Slab', serif;
+}
+
+.thmpsn-nav-bar-link:hover {
+  color: gray;
+  transition: 0.1s;
+}
+
+#dashboard {
+  /* background-image: linear-gradient(#0375B4, #0375AF); */
+  background-image: linear-gradient(#0375B4, rgb(29, 70, 117));
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#plot-box {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: white;
+  text-align: center;
+}
+
+#buttons {
+  align-content: center;
+  margin-bottom: 20px;
+}
+
+.thmpsn-btn {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  font-size: 18px;
+  padding: 5px 15px;
+  margin-right: 10px;
+}
+
+.thmpsn-btn-secondary {
+  background: rgba(0, 0, 255, 0);
+  border: white;
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+}
+
+.thmpsn-btn-secondary:hover {
+  color: gray;
+  border-color: gray;
+  transition: 0.1s;
+}
+
+.thmpsn-btn-primary {
+  background: #EA5356;
+  border: white;
+  color: white;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.thmpsn-btn-primary:hover {
+  background: #972539;
+  transition: 0.1s;
+}
+
+#thmpsn-dialog-header {
+  font-family: Game-of-Thrones;
+  /* margin-top: 20px; */
+  color: gold;
+  background-color: rgba(0, 0, 0, 0.433);
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+#thmpsn-adopt-btn {
+  background: #A266A4;
+  border: 1px rgb(255, 255, 255) solid;
+  border-radius: 10px;
+  color: white;
+  /* font-weight: bold; */
+  font-size: 30px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  margin-top: 15%;
+  padding: 5px 15px;
+}
+
+#thmpsn-adopt-btn:hover {
+  background: white;
+  color: #A266A4;
+  transition: 0.2s;
+}
+
+#thmpsn-leave-btn {
+  background: #A266A4;
+  border: 1px rgb(255, 255, 255) solid;
+  border-radius: 10px;
+  color: white;
+  /* font-weight: bold; */
+  font-size: 25px;
+  margin-left: 20px;
+  padding: 5px 15px;
+}
+
+#thmpsn-leave-btn:hover {
+  background: white;
+  color: #A266A4;
+  transition: 0.2s;
+}
+
+/* greys out the screen */
+#cover {
+  display: none;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: gray;
+  filter: alpha(Opacity=50);
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5
+}
+
+/* popup with cat website */
+#dialog {
+  min-height: 30%;
+  background: url('./src/images/cute-cat.jpg') no-repeat center;
+  display: none;
+  top: 200px;
+  width: 60%;
+  height: 85%;
+  position: absolute;
+  z-index: 100;
+  background: white;
+  padding: 2px;
+  font: 10pt tahoma;
+  /* border: 1px solid gray */
+}
+
+#profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+}
+
+h2 {
+  margin-top: 15px;
+  text-align: center
+}
+
+h3 {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.profile-area {
+  font-family:'Courier New', Courier, monospace
+}
+
+.highlighted {
+  border-left: solid purple 4px;
+}
+
+#article > div > div > p {
+  padding-left: 20px;
+  font-size: 20px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+#article > div > div > img {
+  padding-left: 20px;
+}
+
+#article {
+  margin-bottom: 300px;
+}

@@ -1,0 +1,171 @@
+<html>
+
+<head>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  </body>
+  <script src="dist/thompson.bundle.js"></script>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./src/index.css">
+
+</head>
+
+<body>
+
+  <body>
+
+    <!-- page content -->
+    <div class="container-fluid" id="wrapper">
+
+      <!-- used to gray out the screen -->
+      <div id="cover"></div>
+
+      <div class="container" id="dialog"
+        style="background-size: contain; background: no-repeat; background-image: url(./src/images/cute-cat.jpg)">
+        <div class="row justify-content-center">
+          <!-- cat content goes here dynamically -->
+        </div>
+      </div>
+
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand thmpsn-nav-bar-link" href="http://ericriddoch.info/portfolio.html">&#8249; Back to Projects</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link thmpsn-nav-bar-link active" href="http://ericriddoch.info/">
+                <i class="fa fa-home"></i> Home<span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link thmpsn-nav-bar-link active" href="#">
+                  <i class="fa fa-code"></i> Source Code<span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <span class="navbar-text">Made with D3.js</span>
+      </nav>
+
+      <div class="row justify-content-center" id="dashboard">
+        <div class="col">
+          <div class="row justify-content-center">
+            <div id="plot-box">
+              <h2>Thompson Sampling on Background Images</h2>
+              <svg id="visualization" width="700" height="380"></svg>
+              <h4>Predicted Conversion Rate</h4>
+            </div>
+          </div>
+          <div class="row justify-content-center" id="buttons">
+            <button id='reset-button' class='thmpsn-btn thmpsn-btn-secondary'>Reset</button>
+            <button id='sample-button' class='thmpsn-btn thmpsn-btn-primary'>Sample</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container" id="article">
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <!-- article content is centered -->
+          <h2>Why Thompson Sampling Is Better Than A/B Testing</h2>
+          </br>
+
+          <div class="row align-items-center profile-area">
+            <div class="col-sm-2">
+              <img src="./src/images/profile-thumbnail.png" id="profile-pic"></div>
+            <div class="col">
+              <p>Eric Riddoch</br>April 28, 2019</p>
+            </div>
+          </div>
+
+          <!-- content -->
+          </br>
+          </br>
+
+          <h3>What Is Thompson Sampling?</h3>
+          <p>With a heaping wad of cash in hand, you stand in front of a row of slot machines wondering which one has
+            the highest win rate. This is called the <a
+              href="https://en.wikipedia.org/wiki/Multi-armed_bandit">“multi-armed bandit problem”</a>. (A slot machine
+            is a one-armed
+            bandit, so really it should be called the “multiple one-armed bandits problem”). Thompson Sampling is the
+            algorithm that will most optimally get you to the best slot machine.</p>
+          <p>Besides gambling, two other applications of Thompson Sampling are advertising and medicine. You might be
+            wondering which
+            version of your website out of many has the highest conversion rate, or which cancer drug has the lowest
+            rate of rejection by the human body. These questions can both be framed as multi-armed bandit problems.
+          </p>
+
+          <img src="./src/images/bandit.jpg" height="450px">
+          <p><em>Slot machines are called "bandits" because they rob people. Given any number of bandits, Thompson
+              Sampling seeks
+              to find the one with the highest expected payout.
+            </em></p>
+
+          </br>
+          <h3>The Pitfalls of A/B Testing</h3>
+          <p>Many companies approach the advertising question posed above with a very naïve approach. If we have three
+            versions of our
+            advertisement, why don’t we host all three versions for one week? And at the end, we’ll see which version
+            got the most clicks.</p>
+          <p class="highlighted">This is called <a href="https://en.wikipedia.org/wiki/A/B_testing">A/B testing</a>. A/B
+            Testing is a basic, controlled experiment where all product versions are
+            distributed equally to users. </p>
+          <p>Question: But what if two of my three website versions are <em>awful?</em></p>
+          <p>Depending on our specific implementation of A/B testing, we would be exposing the bad websites to <em>two
+              thirds</em> of our users. That means the majority of our customer base is getting a second-rate product
+            for
+            some period. With this process, advertising companies may spend months hosting the worst versions of their
+            ad before A/B testing allows them to change course.</p>
+
+          <p><strong>Note</strong>, another criticism of A/B testing is that it is difficult to perform when there are
+            many variants
+            to be tested. With limited time or resources, it may simply be infeasible to test each version equally.
+          </p>
+          <p>In recent years, Thompson Sampling has gained a lot of popularity in industry for “solving” the A/B test
+            problem using fewer resources than A/B testing. Rather than administering all variants equally, Thompson
+            sampling intelligently chooses to investigate one branch at a time.</p>
+
+          <img src="./src/images/thompson_vs_gittens.png" width="500px">
+          <p><em>This figure compares Thompson Sampling to one of its rivals, the Gittens Algorithm.
+              "Number of Pulls" refers to the the total number of decisions and updates over the life of the problem.
+              Observe that the two algorithms win roughly the same amount, but Thompson is O(1) while Gittens is O(k^n)
+              where k is twice the number of bandits and n is the number of pulls. <a href="">Python code here</a>
+            </em></p>
+
+          </br>
+          <h3>Cat Website Example</h3>
+          <p>Consider our three versions of the cat adoption website above. </p>
+          <p>Given a cat website you may choose to (1) adopt a cat, or (2) leave. Upon clicking, the algorithm records
+            your response. Then, it performs a <a href="https://en.wikipedia.org/wiki/Bayesian_inference">Bayesian
+              update</a> on the prior distribution of possible values of the
+            conversion rate for the version with the wet cat.</p>
+          <p>Let’s walk through it:</p>
+          <p>Say, you click “sample” and the wet cat version pops up. After seeing it, you are so alarmed that you
+            can’t even imagine having one of these creatures living anywhere near where you sleep. Naturally, you
+            politely click “Not today…” and shudder at the thought of the freakish animal you just escaped.</p>
+          <p>You will now see the wet cat beta distribution decrease. Click “sample” again. When you do this, the
+            algorithm takes a random sample from each cat website distribution. Then it serves you whichever version
+            corresponds to the largest sample. </p>
+          <p>Fortunately, since you just rejected that awful wet monster, there is less likelihood that the next
+            picture you will see is the wet cat. It’s still possible, but less likely now. </p>
+          <p>If—for some unfathomable reason—you clicked “Adopt a Cat” after seeing the wet cat (maybe your hand
+            slipped?), then you would now have the blessing of seeing it more often. </p>
+
+          </br>
+          <h3>A Potential Downfall of Thompson Sampling</h3>
+          <p>A reason not to use Thompson sampling might if swapping out test branches more than once is infeasible.
+            For example, say you wanted to know which billboard ad on a highway side is most effective. In this case,
+            the cost/effort of swapping out billboard variations is significant. </p>
+          <p>Here, you could consider switching ads more infrequently (maybe wait a week or a month at a time). All
+            the data you collect between decision points simply give you more information about where the true value
+            of the conversion rate could plausibly lie.</p>
+
+        </div>
+      </div>
+  </body>
+
+</html>
